@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Link Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    input, textarea, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    textarea {
+      height: 300px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎯 Custom Redirect Page Generator</h2>
+
+  <label>🔗 আপনার Redirect লিংক (Adsterra Direct Link):</label>
+  <input type="text" id="link" placeholder="https://example.com/yourlink">
+
+  <label>📌 শেয়ার করার টাইটেল (og:title):</label>
+  <input type="text" id="title" placeholder="পাগল / জানলে চমকে যাবেন!">
+
+  <label>📝 ডিসক্রিপশন (og:description):</label>
+  <input type="text" id="desc" placeholder="একবার ক্লিক করেই জেনে নিন">
+
+  <label>🖼️ শেয়ার ইমেজ URL (og:image):</label>
+  <input type="text" id="img" placeholder="https://yourimageurl.com/image.jpg">
+
+  <button onclick="generateCode()">✅ কোড জেনারেট করুন</button>
+
+  <label>📄 নিচে আপনার কোড:</label>
+  <textarea id="output" readonly></textarea>
+
+  <script>
+    function generateCode() {
+      const link = document.getElementById("link").value;
+      const title = document.getElementById("title").value;
+      const desc = document.getElementById("desc").value;
+      const img = document.getElementById("img").value;
+
+      const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta property="og:title" content="${title}" />
+  <meta property="og:description" content="${desc}" />
+  <meta property="og:image" content="${img}" />
+  <meta property="og:url" content="${link}" />
+  <meta http-equiv="refresh" content="0;url=${link}" />
+  <title>${title}</title>
+</head>
+<body>
+  <p>Redirecting to your link...</p>
+</body>
+</html>`;
+
+      document.getElementById("output").value = html.trim();
+    }
+  </script>
+</body>
+</html>
